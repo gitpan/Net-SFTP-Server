@@ -2,7 +2,7 @@ package Net::SFTP::Server::FS;
 
 use strict;
 use warnings;
-use Carp;
+# use Carp;
 
 use Fcntl;
 use File::Spec;
@@ -139,11 +139,11 @@ sub _set_attrs {
 
 sub handle_command_open_v3 {
     my ($self, $id, $path, $flags, $attrs) = @_;
-    my ($old_umask, $writable);
+    my $writable = $flags & SSH_FXF_WRITE;
     my $pflags = $self->sftp_open_flags_to_sysopen($flags);
     my $perms = $attrs->{mode};
+    my $old_umask;
     if (defined $perms) {
-	$writable = $perms & SSH_FXF_WRITE;
 	$old_umask = umask $perms;
     }
     else {
@@ -211,7 +211,7 @@ sub handle_command_close_v3 {
 	close($fh) or return $self->push_status_errno_response($id);
     }
     else {
-	croak "Internal error: unknown handler type $type";
+	die "Internal error: unknown handler type $type";
     }
     $self->push_status_ok_response($id);
 }

@@ -1,6 +1,6 @@
 package Net::SFTP::Server;
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use strict;
 use warnings;
@@ -545,7 +545,7 @@ implementing an standard SFTP server.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2009 by Salvador FandiE<ntilde>o (sfandino@yahoo.com)
+Copyright (C) 2009, 2011 by Salvador FandiE<ntilde>o (sfandino@yahoo.com)
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.10.0 or,
